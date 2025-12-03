@@ -539,7 +539,312 @@
         color: #333;
         margin-top: 10px;
     }
-/* Scrollable horizontal nav */
+
+    /* ================== 🎆 DIWALI LOADING ANIMATION ================== */
+    .diwali-loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(26, 26, 46, 0.98);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        backdrop-filter: blur(4px);
+    }
+
+    .diwali-loading-container {
+        text-align: center;
+    }
+
+    /* ---- Rotating Chakra/Sparkler ---- */
+    .diwali-chakra {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 30px;
+        position: relative;
+        animation: chakraRotate 3s linear infinite;
+    }
+
+    @keyframes chakraRotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .chakra-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.5rem;
+        animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.2); }
+    }
+
+    /* Sparks around the chakra */
+    .chakra-spark {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 50%;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: sparkleFloat 2s ease-in-out infinite;
+    }
+
+    .spark1 { animation-delay: 0s; transform: translate(-50%, -50%) rotate(0deg) translateY(-70px); }
+    .spark2 { animation-delay: 0.25s; transform: translate(-50%, -50%) rotate(60deg) translateY(-70px); }
+    .spark3 { animation-delay: 0.5s; transform: translate(-50%, -50%) rotate(120deg) translateY(-70px); }
+    .spark4 { animation-delay: 0.75s; transform: translate(-50%, -50%) rotate(180deg) translateY(-70px); }
+    .spark5 { animation-delay: 1s; transform: translate(-50%, -50%) rotate(240deg) translateY(-70px); }
+    .spark6 { animation-delay: 1.25s; transform: translate(-50%, -50%) rotate(300deg) translateY(-70px); }
+
+    @keyframes sparkleFloat {
+        0%, 100% { 
+            opacity: 1;
+            filter: brightness(1);
+            transform: translate(-50%, -50%) rotate(0deg) translateY(-70px) scale(1);
+        }
+        50% { 
+            opacity: 0.4;
+            filter: brightness(1.8) drop-shadow(0 0 8px #ffd700);
+            transform: translate(-50%, -50%) rotate(0deg) translateY(-80px) scale(1.1);
+        }
+    }
+
+    .loading-text {
+        color: var(--diwali-gold);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-top: 30px;
+        animation: fadeInOut 2s ease-in-out infinite;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .loading-subtext {
+        color: var(--diwali-orange);
+        font-size: 1rem;
+        margin-top: 10px;
+        animation: fadeInOut 2s ease-in-out infinite 0.3s;
+    }
+
+    @keyframes fadeInOut {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+    }
+
+    /* ==================== END LOADING ANIMATION ==================== */
+
+    /* ================== 🌟 QUICK ORDER BUTTON ================== */
+    .floating-quick-order {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ffd700, #ff8c00);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 6px 20px rgba(255, 140, 0, 0.4);
+        z-index: 999;
+        transition: all 0.3s ease;
+        border: 3px solid white;
+        animation: floatUp 2s ease-in-out infinite;
+    }
+
+    @keyframes floatUp {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .floating-quick-order:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(255, 140, 0, 0.6);
+    }
+
+    .floating-quick-order i {
+        color: #1a1a2e;
+        font-size: 1.5rem;
+    }
+
+    .quick-order-text {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: #1a1a2e;
+        text-align: center;
+        margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+        .floating-quick-order {
+            bottom: 100px;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .floating-quick-order i {
+            font-size: 1.2rem;
+        }
+        
+        .quick-order-text {
+            font-size: 0.5rem;
+        }
+    }
+
+    /* ================== 📦 QUICK ORDER LISTS ================== */
+    .quick-order-lists-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .quick-order-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        border: 2px solid #e0e0e0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .quick-order-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--diwali-orange);
+        box-shadow: 0 8px 25px rgba(255, 140, 0, 0.2);
+    }
+
+    .quick-order-card-emoji {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .quick-order-card-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #1a1a2e;
+        margin-bottom: 8px;
+    }
+
+    .quick-order-card-desc {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .quick-order-card-price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--diwali-orange);
+        margin-bottom: 10px;
+    }
+
+    .quick-order-card-btn {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--diwali-orange), var(--diwali-red));
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .quick-order-card-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+    }
+
+    /* ================== 📋 QUICK ORDER DETAILS ================== */
+    .quick-order-products-list {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .quick-order-product-item {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-left: 4px solid var(--diwali-gold);
+    }
+
+    .quick-order-product-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .quick-order-product-info {
+        flex: 1;
+    }
+
+    .quick-order-product-name {
+        font-weight: 700;
+        color: #1a1a2e;
+        margin-bottom: 5px;
+    }
+
+    .quick-order-product-category {
+        font-size: 0.8rem;
+        color: #999;
+        margin-bottom: 8px;
+    }
+
+    .quick-order-product-price {
+        font-size: 1.1rem;
+        color: var(--diwali-orange);
+        font-weight: 700;
+    }
+
+    .quick-order-summary {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.1));
+        border: 2px solid var(--diwali-gold);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .quick-order-summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .quick-order-summary-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        color: var(--diwali-red);
+        border-top: 2px solid var(--diwali-gold);
+        padding-top: 15px;
+        margin-top: 15px;
+    }
+
+    /* ==================== END QUICK ORDER ==================== */
+
+<!-- Scrollable horizontal nav */
 .category-nav {
     display: flex;
     align-items: center;
@@ -1682,6 +1987,12 @@
     <span class="cart-items-count">(0 items)</span>
 </div>
 
+<!-- Quick Order Button -->
+<div class="floating-quick-order" role="button" data-bs-toggle="modal" data-bs-target="#quickOrderModal" title="Quick Order">
+    <i class="bi bi-lightning-fill"></i>
+    <span class="quick-order-text">Quick Order</span>
+</div>
+
 <!-- Cart Modal -->
 <div class="modal fade" id="cartModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
@@ -1703,6 +2014,17 @@
                     <div class="d-flex justify-content-between">
                         <span>Subtotal:</span>
                         <span>₹<span id="modalSubtotal">0.00</span></span>
+                    </div>
+                    <!-- Minimum Order Alert -->
+                    <div id="minOrderAlert" class="alert alert-warning alert-dismissible fade show mt-3" role="alert" style="display: none;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <i class="bi bi-exclamation-triangle-fill" style="font-size: 1.2rem; color: #856404;"></i>
+                            <div>
+                                <strong>Minimum Order Required!</strong>
+                                <p class="mb-0 mt-1">You need to add ₹<span id="shortfallAmount">0.00</span> more items to reach the minimum order of ₹3000</p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 </div>
                 <form id="checkoutForm" class="needs-validation" novalidate>
@@ -1754,6 +2076,71 @@
                 <button type="button" class="btn btn-primary" id="proceedToCheckout">Proceed to Checkout</button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Quick Order Modal -->
+<div class="modal fade" id="quickOrderModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                <h5 class="modal-title text-white">
+                    <i class="bi bi-lightning-fill"></i> Quick Order - Pre-Made Lists
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="quickOrderListsContainer" class="quick-order-lists-container">
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-warning" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-3">Loading quick order lists...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Order Details Modal -->
+<div class="modal fade" id="quickOrderDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-gradient" style="background: linear-gradient(135deg, #ff8c00, #ff6b35);">
+                <h5 class="modal-title text-white" id="detailsModalTitle"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="quickOrderDetailsContent">
+                    <!-- Products will be populated here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                <button type="button" class="btn btn-primary" id="proceedQuickOrderCheckout">
+                    <i class="bi bi-check-circle"></i> Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="inventory-container">
+<div id="diwaliLoadingOverlay" class="diwali-loading-overlay" style="display: none;">
+    <div class="diwali-loading-container">
+        <!-- Rotating Chakra/Sparkler -->
+        <div class="diwali-chakra">
+            <div class="chakra-center">✨</div>
+            <div class="chakra-spark spark1">🎆</div>
+            <div class="chakra-spark spark2">✨</div>
+            <div class="chakra-spark spark3">🎇</div>
+            <div class="chakra-spark spark4">💫</div>
+            <div class="chakra-spark spark5">🌟</div>
+            <div class="chakra-spark spark6">✨</div>
+        </div>
+        <h3 class="loading-text">Processing Your Order...</h3>
+        <p class="loading-subtext">🪔 Celebrating with you! Please wait... 🪔</p>
     </div>
 </div>
 
@@ -2289,6 +2676,7 @@ function updateCartDisplay() {
     document.getElementById("modalSubtotal").textContent = total.toFixed(2);
 
     updateCartModal();
+    updateMinOrderAlert(); // Check minimum order requirement
 }
 
 // =====================================================
@@ -2417,17 +2805,246 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 </script>
+
 <script>
 // =====================================================
-// 🟣 CHECKOUT HANDLER – RESTORED
+// ⚡ QUICK ORDER SYSTEM
 // =====================================================
+
+let currentQuickOrderList = null;
+let quickOrderListsCache = null;
+
+// Load quick order lists when modal is opened
+document.getElementById('quickOrderModal')?.addEventListener('show.bs.modal', function() {
+    loadQuickOrderLists();
+});
+
+async function loadQuickOrderLists() {
+    try {
+        const response = await fetch('/inventory/quick-order-lists/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]')?.value || ''
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            quickOrderListsCache = data.quick_order_lists;
+            displayQuickOrderLists(data.quick_order_lists);
+        } else {
+            showAlert('Failed to load quick order lists', 'danger');
+        }
+    } catch (error) {
+        console.error('Error loading quick order lists:', error);
+        showAlert('Network error. Please try again.', 'danger');
+    }
+}
+
+function displayQuickOrderLists(lists) {
+    const container = document.getElementById('quickOrderListsContainer');
+    
+    let html = '<div class="quick-order-lists-container">';
+    
+    lists.forEach(list => {
+        const total = list.total || 0;
+        html += `
+            <div class="quick-order-card" onclick="openQuickOrderDetails(${list.id})">
+                <div class="quick-order-card-emoji">${list.emoji}</div>
+                <div class="quick-order-card-title">${list.name}</div>
+                <div class="quick-order-card-desc">${list.description}</div>
+                <div class="quick-order-card-price">₹${total.toFixed(2)}</div>
+                <button class="quick-order-card-btn">
+                    View & Order <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function openQuickOrderDetails(listId) {
+    const list = quickOrderListsCache.find(l => l.id === listId);
+    if (!list) return;
+
+    currentQuickOrderList = list;
+
+    const modalTitle = document.getElementById('detailsModalTitle');
+    const content = document.getElementById('quickOrderDetailsContent');
+
+    modalTitle.innerHTML = `${list.emoji} ${list.name}`;
+
+    let html = `
+        <p style="color: #666; margin-bottom: 20px;">${list.description}</p>
+        <div class="quick-order-products-list">
+    `;
+
+    list.products.forEach(product => {
+        html += `
+            <div class="quick-order-product-item">
+                ${product.image_url ? `<img src="${product.image_url}" alt="${product.name}" class="quick-order-product-image">` : '<div style="width: 80px; height: 80px; background: #e0e0e0; border-radius: 8px; display: flex; align-items: center; justify-content: center;"><i class="bi bi-image" style="font-size: 2rem; color: #999;"></i></div>'}
+                <div class="quick-order-product-info">
+                    <div class="quick-order-product-name">${product.name}</div>
+                    <div class="quick-order-product-category">${product.category}</div>
+                    <div class="quick-order-product-price">₹${product.price.toFixed(2)}</div>
+                </div>
+            </div>
+        `;
+    });
+
+    html += '</div>';
+
+    html += `
+        <div class="quick-order-summary">
+            <div class="quick-order-summary-row">
+                <span>Total Items:</span>
+                <span>${list.products.length}</span>
+            </div>
+            <div class="quick-order-summary-row">
+                <span>Categories:</span>
+                <span>${[...new Set(list.products.map(p => p.category))].join(', ')}</span>
+            </div>
+            <div class="quick-order-summary-total">
+                <span>Order Total:</span>
+                <span>₹${list.total.toFixed(2)}</span>
+            </div>
+        </div>
+    `;
+
+    content.innerHTML = html;
+
+    // Show details modal
+    const detailsModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('quickOrderDetailsModal'));
+    detailsModal.show();
+}
+
+document.getElementById('proceedQuickOrderCheckout')?.addEventListener('click', async function() {
+    if (!currentQuickOrderList) {
+        showAlert('Please select a quick order list', 'warning');
+        return;
+    }
+
+    const loadingOverlay = document.getElementById('diwaliLoadingOverlay');
+    loadingOverlay.style.display = 'flex';
+
+    try {
+        const response = await fetch('/inventory/quick-order/' + currentQuickOrderList.id + '/checkout/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({
+                list_id: currentQuickOrderList.id,
+                products: currentQuickOrderList.products
+            })
+        });
+
+        const data = await response.json();
+
+        if (data.success && data.ready_for_checkout) {
+            // Populate cart with quick order items
+            cart = [];
+            for (const [productId, item] of Object.entries(data.cart_items)) {
+                cart.push({
+                    id: parseInt(productId),
+                    name: item.name,
+                    quantity: item.quantity,
+                    amount: item.price
+                });
+            }
+
+            updateCartDisplay();
+
+            // Close all modals
+            bootstrap.Modal.getInstance(document.getElementById('quickOrderDetailsModal'))?.hide();
+            bootstrap.Modal.getInstance(document.getElementById('quickOrderModal'))?.hide();
+
+            // Wait a moment then show loading
+            setTimeout(() => {
+                // Open cart modal to proceed with checkout
+                const cartModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('cartModal'));
+                cartModal.show();
+                
+                loadingOverlay.style.display = 'none';
+                
+                // Scroll to checkout button
+                setTimeout(() => {
+                    const checkoutBtn = document.getElementById('proceedToCheckout');
+                    checkoutBtn?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 500);
+            }, 1500);
+        } else if (data.shortfall !== undefined) {
+            loadingOverlay.style.display = 'none';
+            showAlert(`Minimum order amount is ₹${data.minimum_required}. Current: ₹${data.current_total.toFixed(2)}. Shortfall: ₹${data.shortfall.toFixed(2)}`, 'warning');
+        } else {
+            loadingOverlay.style.display = 'none';
+            showAlert(data.error || 'Error processing quick order', 'danger');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        loadingOverlay.style.display = 'none';
+        showAlert('Network error. Please try again.', 'danger');
+    }
+});
+
+function showAlert(message, type = 'info') {
+    // Use existing toast/alert system if available, otherwise use alert
+    if (typeof showToast === 'function') {
+        showToast(message, type);
+    } else {
+        alert(message);
+    }
+}
+
+// =====================================================
+// 🟣 CHECKOUT HANDLER – RESTORED
+
+// =====================================================
+
+const MIN_ORDER_AMOUNT = 3000;
 
 document.addEventListener("DOMContentLoaded", function () {
 
     const checkoutButton = document.getElementById("proceedToCheckout");
     const checkoutForm = document.getElementById("checkoutForm");
 
+    // Update minimum order alert whenever cart changes
+    window.updateMinOrderAlert = function() {
+        const currentTotal = parseFloat(document.getElementById('modalSubtotal').innerText) || 0;
+        const minOrderAlert = document.getElementById('minOrderAlert');
+        const shortfallAmount = document.getElementById('shortfallAmount');
+        
+        if (currentTotal < MIN_ORDER_AMOUNT) {
+            const shortfall = MIN_ORDER_AMOUNT - currentTotal;
+            shortfallAmount.innerText = shortfall.toFixed(2);
+            minOrderAlert.style.display = 'block';
+            checkoutButton.disabled = true;
+            checkoutButton.style.opacity = '0.6';
+            checkoutButton.style.cursor = 'not-allowed';
+            checkoutButton.title = `Add ₹${shortfall.toFixed(2)} more items to checkout`;
+        } else {
+            minOrderAlert.style.display = 'none';
+            checkoutButton.disabled = false;
+            checkoutButton.style.opacity = '1';
+            checkoutButton.style.cursor = 'pointer';
+            checkoutButton.title = '';
+        }
+    };
+
     checkoutButton.addEventListener("click", async function () {
+
+        // Validate minimum order amount first
+        const currentTotal = parseFloat(document.getElementById('modalSubtotal').innerText) || 0;
+        if (currentTotal < MIN_ORDER_AMOUNT) {
+            const shortfall = MIN_ORDER_AMOUNT - currentTotal;
+            alert(`Minimum order amount is ₹${MIN_ORDER_AMOUNT}. Please add ₹${shortfall.toFixed(2)} more items.`);
+            return;
+        }
 
         // Validate form
         if (!checkoutForm.checkValidity()) {
@@ -2439,6 +3056,13 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Your cart is empty!");
             return;
         }
+
+        // Disable button and show loading animation
+        checkoutButton.disabled = true;
+        const originalButtonText = checkoutButton.innerText;
+        checkoutButton.innerText = "Processing...";
+        const loadingOverlay = document.getElementById('diwaliLoadingOverlay');
+        loadingOverlay.style.display = 'flex';
 
         // Gather customer data
         const customerData = {
@@ -2478,16 +3102,34 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await res.json();
 
             if (data.success) {
-                showDiwaliSuccess(data.orderSummary.total);
+                // Keep loading animation for 2 seconds before showing success
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    showDiwaliSuccess(data.orderSummary.total);
 
-                cart = [];
-                updateCartDisplay();
+                    cart = [];
+                    updateCartDisplay();
+                }, 1500);
             } else {
-                alert(data.error || "Checkout failed.");
+                // Hide loading and restore button
+                loadingOverlay.style.display = 'none';
+                checkoutButton.disabled = false;
+                checkoutButton.innerText = originalButtonText;
+
+                // Handle minimum order error gracefully
+                if (data.shortfall !== undefined) {
+                    alert(`❌ Minimum Order Requirement\n\nMinimum order amount: ₹${data.minimum_required}\nCurrent total: ₹${data.current_total.toFixed(2)}\nShortfall: ₹${data.shortfall.toFixed(2)}\n\nPlease add more items to your cart.`);
+                } else {
+                    alert(data.error || "Checkout failed.");
+                }
             }
 
         } catch (err) {
             console.error(err);
+            // Hide loading and restore button
+            loadingOverlay.style.display = 'none';
+            checkoutButton.disabled = false;
+            checkoutButton.innerText = originalButtonText;
             alert("Network error. Try again.");
         }
 

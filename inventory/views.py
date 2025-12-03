@@ -94,32 +94,57 @@ def checkout(request):
             # Validate customer data
             required_fields = ['fullName', 'email', 'phone', 'deliveryAddress']
             if not all(field in customer_data and customer_data[field] for field in required_fields):
-                return JsonResponse({
-                    'success': False,
-                    'error': 'Please fill in all required fields'
-                })
+                return utils.handle_api_error(
+                    'validation',
+                    'Please fill in all required fields',
+                    400
+                )
 
             # Update user profile if requested
-            if request.user.is_authenticated and customer_data.get('updateProfile'):
-                User = get_user_model()
-                user = User.objects.get(id=request.user.id)
-                
-                # Split full name into first_name and last_name
-                full_name = customer_data['fullName'].split(maxsplit=1)
-                user.first_name = full_name[0]
-                user.last_name = full_name[1] if len(full_name) > 1 else ''
-                
-                user.phone_number = customer_data['phone']
-                user.address = customer_data['deliveryAddress']
-                # Don't update email as it might require verification
-                user.save()
+            try:
+                if request.user.is_authenticated and customer_data.get('updateProfile'):
+                    User = get_user_model()
+                    user = User.objects.get(id=request.user.id)
+                    
+                    # Split full name into first_name and last_name
+                    full_name = customer_data['fullName'].split(maxsplit=1)
+                    user.first_name = full_name[0]
+                    user.last_name = full_name[1] if len(full_name) > 1 else ''
+                    
+                    user.phone_number = customer_data['phone']
+                    user.address = customer_data['deliveryAddress']
+                    # Don't update email as it might require verification
+                    user.save()
+            except Exception as profile_error:
+                # Log but don't fail checkout
+                import logging
+                logger = logging.getLogger(__name__)
+                logger.warning(f"Profile update failed: {str(profile_error)}")
             
             # Validate cart is not empty
             if not cart_items:
-                return JsonResponse({
-                    'success': False,
-                    'error': 'Cart is empty'
-                })
+                return utils.handle_api_error(
+                    'validation',
+                    'Your cart is empty. Please add items before checking out.',
+                    400
+                )
+
+            # Calculate total amount first
+            total_amount = sum(float(item['price']) * item['quantity'] for item in cart_items.values())
+            
+            # Validate minimum order amount (3000)
+            MIN_ORDER_AMOUNT = 3000
+            if total_amount < MIN_ORDER_AMOUNT:
+                return utils.handle_api_error(
+                    'minimum_order',
+                    f'Minimum order amount is ₹{MIN_ORDER_AMOUNT}. Current total: ₹{total_amount:.2f}',
+                    400,
+                    {
+                        'minimum_required': MIN_ORDER_AMOUNT,
+                        'current_total': total_amount,
+                        'shortfall': MIN_ORDER_AMOUNT - total_amount
+                    }
+                )
 
             # Start database transaction
             with transaction.atomic():
@@ -128,18 +153,17 @@ def checkout(request):
                     try:
                         product = Product.objects.get(id=product_id)
                         if product.stock_quantity < item['quantity']:
-                            return JsonResponse({
-                                'success': False,
-                                'error': f'Insufficient stock for {product.name}'
-                            })
+                            return utils.handle_api_error(
+                                'stock',
+                                f'Insufficient stock for {product.name}. Available: {product.stock_quantity}',
+                                400
+                            )
                     except Product.DoesNotExist:
-                        return JsonResponse({
-                            'success': False,
-                            'error': f'Product with ID {product_id} not found'
-                        })
-
-                # Calculate total amount
-                total_amount = sum(float(item['price']) * item['quantity'] for item in cart_items.values())
+                        return utils.handle_api_error(
+                            'not_found',
+                            f'Product with ID {product_id} not found',
+                            404
+                        )
                 
                 # Create the order
                 order = Order.objects.create(
@@ -180,18 +204,7 @@ def checkout(request):
                     'total': total_amount,
                     'order_id': order.id
                 }
-                for product_id, item in cart_items.items():
-                    product = Product.objects.get(id=product_id)
-                    item_quantity = item.get('quantity', 0)
-                    if item_quantity > 0:
-                        product.stock_quantity -= item_quantity
-                        product.save()
-                        
-                        # Send low stock alert if needed
-                        if product.is_low_stock:
-                            transaction.on_commit(lambda p=product: utils.send_stock_alert(p))
 
-                # Queue confirmation email to be sent after successful transaction
                 # Queue confirmation email to be sent after successful transaction
                 transaction.on_commit(lambda: utils.send_order_confirmation({
                     'customerData': customer_data,
@@ -206,15 +219,26 @@ def checkout(request):
             })
             
         except json.JSONDecodeError:
-            return JsonResponse({
-                'success': False,
-                'error': 'Invalid request data'
-            })
+            return utils.handle_api_error(
+                'validation',
+                'Invalid request data format',
+                400
+            )
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f"Checkout error: {str(e)}", exc_info=True)
+            return utils.handle_api_error(
+                'server',
+                'An unexpected error occurred during checkout. Please try again later.',
+                500
+            )
             
-    return JsonResponse({
-        'success': False,
-        'error': 'Invalid method'
-    })
+    return utils.handle_api_error(
+        'validation',
+        'Invalid request method',
+        405
+    )
 
 @admin_required
 @login_required(login_url='account_login')
@@ -583,3 +607,320 @@ def generate_invoice(request, order_id):
         
     except Order.DoesNotExist:
         return HttpResponse("Order not found", status=404)
+
+
+# =====================================================
+# 🔴 ERROR HANDLERS
+# =====================================================
+
+def error_page(request, error_code='500', error_title='Oops! Something went wrong', 
+               error_message='We encountered an unexpected error. Please try again later.', 
+               error_details=''):
+    """Generic error page handler"""
+    context = {
+        'error_code': error_code,
+        'error_title': error_title,
+        'error_message': error_message,
+        'error_details': error_details,
+    }
+    return render(request, 'error.html', context, status=int(error_code.split()[0]) if error_code[0].isdigit() else 500)
+
+
+def handle_404(request, exception=None):
+    """Handle 404 Page Not Found errors"""
+    return error_page(
+        request,
+        error_code='404',
+        error_title='Page Not Found',
+        error_message='The page you\'re looking for doesn\'t exist or has been moved. Let\'s get you back on track!',
+        error_details='The requested URL could not be found on this server.'
+    )
+
+
+def handle_500(request):
+    """Handle 500 Internal Server errors"""
+    return error_page(
+        request,
+        error_code='500',
+        error_title='Internal Server Error',
+        error_message='Our servers encountered an issue while processing your request. Our team has been notified!',
+        error_details='An unexpected error occurred. Please try refreshing the page or come back later.'
+    )
+
+
+def handle_403(request, exception=None):
+    """Handle 403 Permission Denied errors"""
+    return error_page(
+        request,
+        error_code='403',
+        error_title='Access Denied',
+        error_message='You don\'t have permission to access this resource.',
+        error_details='If you believe this is an error, please contact support.'
+    )
+
+
+def handle_400(request, exception=None):
+    """Handle 400 Bad Request errors"""
+    return error_page(
+        request,
+        error_code='400',
+        error_title='Bad Request',
+        error_message='The server couldn\'t understand your request. Please try again with valid data.',
+        error_details='The request sent to the server was invalid or malformed.'
+    )
+
+
+def handle_connection_error(request):
+    """Handle connection/network errors"""
+    return error_page(
+        request,
+        error_code='connection',
+        error_title='Connection Error',
+        error_message='It seems we\'re having trouble connecting to our servers. This might be a network issue.',
+        error_details='Check your internet connection and try again.'
+    )
+
+
+def handle_maintenance(request):
+    """Handle maintenance mode"""
+    return error_page(
+        request,
+        error_code='503',
+        error_title='Under Maintenance',
+        error_message='We\'re currently performing maintenance. We\'ll be back online soon!',
+        error_details='Thank you for your patience. Check back in a few moments.'
+    )
+
+
+# =====================================================
+# ⚡ QUICK ORDER SYSTEM
+# =====================================================
+
+@login_required(login_url='account_login')
+def get_quick_order_lists(request):
+    """Get predefined quick order lists with products from all categories"""
+    try:
+        # Get all active products grouped by category
+        products = Product.objects.filter(is_active=True).select_related('category')
+        
+        # Define 5 comprehensive cracker lists
+        quick_order_lists = [
+            {
+                'id': 1,
+                'name': '🎆 Premium Diwali Package',
+                'description': 'Best-seller assortment with premium selections from all categories',
+                'emoji': '🎆',
+                'color': '#ff6b35',
+                'products_query': 'premium|deluxe|special|gold',
+                'min_categories': 3,
+                'price_range': 'mixed',
+            },
+            {
+                'id': 2,
+                'name': '👨‍👩‍👧‍👦 Family Celebration Pack',
+                'description': 'Perfect for family gatherings - safe for kids and adults',
+                'emoji': '👨‍👩‍👧‍👦',
+                'color': '#4b0082',
+                'category_focus': ['Family&Kids', 'General'],
+            },
+            {
+                'id': 3,
+                'name': '👦 Kids Delight Collection',
+                'description': 'Fun and safe crackers for boys and girls',
+                'emoji': '👦',
+                'color': '#ff69b4',
+                'category_focus': ['Boys', 'Girls', 'Family&Kids'],
+            },
+            {
+                'id': 4,
+                'name': '✨ Festive Sparkler Set',
+                'description': 'Beautiful sparklers and flower pots for stunning displays',
+                'emoji': '✨',
+                'color': '#ffd700',
+                'products_query': 'sparkler|flower|pot|fountain',
+            },
+            {
+                'id': 5,
+                'name': '🎉 Grand Celebration Bundle',
+                'description': 'Ultimate assortment - everything for a complete celebration',
+                'emoji': '🎉',
+                'color': '#28a745',
+                'premium': True,
+            },
+        ]
+        
+        # Populate lists with actual products ensuring minimum ₹3000 per list
+        MIN_PACK_AMOUNT = 3000
+        
+        for quick_list in quick_order_lists:
+            list_products = []
+            list_total = 0
+            
+            if 'category_focus' in quick_list:
+                # Get products from specific categories
+                for cat_name in quick_list['category_focus']:
+                    cat_products = products.filter(
+                        category__name__icontains=cat_name
+                    ).order_by('-price')  # Get expensive items first
+                    list_products.extend(cat_products)
+            else:
+                # Get a diverse mix from all categories (prioritize higher-priced items)
+                categories = Category.objects.filter(products__is_active=True).distinct()
+                for category in categories:
+                    cat_products = products.filter(category=category).order_by('-price')
+                    list_products.extend(cat_products)
+            
+            # Remove duplicates while maintaining order
+            seen = set()
+            unique_products = []
+            for p in list_products:
+                if p.id not in seen:
+                    seen.add(p.id)
+                    unique_products.append(p)
+            list_products = unique_products
+            
+            # Select products to reach minimum ₹3000
+            selected_products = []
+            for product in list_products:
+                if list_total >= MIN_PACK_AMOUNT:
+                    break
+                selected_products.append(product)
+                list_total += float(product.price)
+            
+            # If still below minimum, add more products
+            if list_total < MIN_PACK_AMOUNT:
+                remaining_products = [p for p in list_products if p not in selected_products]
+                for product in remaining_products:
+                    if list_total >= MIN_PACK_AMOUNT:
+                        break
+                    selected_products.append(product)
+                    list_total += float(product.price)
+            
+            # Ensure we have at least 4 products for variety
+            if len(selected_products) < 4:
+                all_available = products.exclude(id__in=[p.id for p in selected_products])
+                additional_needed = 4 - len(selected_products)
+                additional = all_available[:additional_needed]
+                selected_products.extend(additional)
+                list_total = sum(float(p.price) for p in selected_products)
+            
+            # Format products for response
+            quick_list['products'] = [
+                {
+                    'id': p.id,
+                    'name': p.name,
+                    'price': float(p.price),
+                    'category': p.category.name,
+                    'image_url': p.image.url if p.image else None,
+                    'quantity': 1,  # Default quantity
+                }
+                for p in selected_products
+            ]
+            
+            # Calculate list total
+            quick_list['total'] = sum(p['price'] * p['quantity'] for p in quick_list['products'])
+            quick_list['item_count'] = len(quick_list['products'])
+        
+        return JsonResponse({
+            'success': True,
+            'quick_order_lists': quick_order_lists
+        })
+        
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Error fetching quick order lists: {str(e)}")
+        return utils.handle_api_error(
+            'server',
+            'Failed to load quick order lists',
+            500
+        )
+
+
+@login_required(login_url='account_login')
+def quick_order_checkout(request):
+    """Handle quick order checkout - adds predefined list to cart and proceeds to checkout"""
+    if request.method != 'POST':
+        return utils.handle_api_error('validation', 'Invalid request method', 405)
+    
+    try:
+        data = json.loads(request.body)
+        list_id = data.get('list_id')
+        products_data = data.get('products', [])
+        
+        if not products_data:
+            return utils.handle_api_error(
+                'validation',
+                'No products selected',
+                400
+            )
+        
+        # Verify product availability and get product details
+        cart_items = {}
+        total_amount = 0
+        
+        for item in products_data:
+            try:
+                product = Product.objects.get(id=item['id'], is_active=True)
+                
+                if product.stock_quantity < item.get('quantity', 1):
+                    return utils.handle_api_error(
+                        'stock',
+                        f'Insufficient stock for {product.name}',
+                        400
+                    )
+                
+                quantity = item.get('quantity', 1)
+                item_total = float(product.price) * quantity
+                total_amount += item_total
+                
+                cart_items[str(product.id)] = {
+                    'name': product.name,
+                    'quantity': quantity,
+                    'price': float(product.price)
+                }
+                
+            except Product.DoesNotExist:
+                return utils.handle_api_error(
+                    'not_found',
+                    f'Product not found',
+                    404
+                )
+        
+        # Check minimum order amount
+        MIN_ORDER_AMOUNT = 3000
+        if total_amount < MIN_ORDER_AMOUNT:
+            return utils.handle_api_error(
+                'minimum_order',
+                f'Minimum order amount is ₹{MIN_ORDER_AMOUNT}. Current total: ₹{total_amount:.2f}',
+                400,
+                {
+                    'minimum_required': MIN_ORDER_AMOUNT,
+                    'current_total': total_amount,
+                    'shortfall': MIN_ORDER_AMOUNT - total_amount,
+                    'cart_items': cart_items,
+                    'list_id': list_id
+                }
+            )
+        
+        # Return cart data for frontend to populate
+        return JsonResponse({
+            'success': True,
+            'message': 'Quick order added to cart successfully',
+            'cart_items': cart_items,
+            'total_amount': total_amount,
+            'list_id': list_id,
+            'ready_for_checkout': True
+        })
+        
+    except json.JSONDecodeError:
+        return utils.handle_api_error('validation', 'Invalid JSON data', 400)
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Quick order checkout error: {str(e)}")
+        return utils.handle_api_error(
+            'server',
+            'Error processing quick order',
+            500
+        )
