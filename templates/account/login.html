@@ -611,17 +611,182 @@
     .footer {
         display: none;
     }
+/* UNIVERSAL PORTAL BACKGROUND (Mobile + Tablet + Laptop) */
+
+body {
+    background: radial-gradient(circle at center, #0d0d0d 20%, #000000 100%);
+    overflow-x: hidden;
+}
+
+/* Portal Glow Ring */
+.portal-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80vmin;
+    height: 80vmin;
+    background: conic-gradient(
+        from 0deg,
+        #ffbb00,
+        #ff0080,
+        #7300ff,
+        #00eaff,
+        #ffbb00
+    );
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotatePortal 8s linear infinite;
+    filter: blur(50px) brightness(1.5);
+    opacity: 0.7;
+    z-index: 1;
+}
+
+@keyframes rotatePortal {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* FORM (Glass Effect) */
+.signup-form {
+    position: relative;
+    z-index: 5;
+    max-width: 450px;
+    margin: 120px auto;
+    padding: 40px;
+    background: rgba(15, 15, 15, 0.6);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    color: white;
+    box-shadow: 0 0 40px rgba(255, 187, 0, 0.4);
+    text-align: center;
+}
+
+/* Floating Brand Text */
+.brand-overlay {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 32px;
+    font-weight: bold;
+    color: #ffd700 !important;
+    text-shadow: 0 0 20px rgba(255,215,0,1);
+    z-index: 10;
+    animation: floatText 3s ease-in-out infinite;
+}
+
+@keyframes floatText {
+    0% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-6px); }
+    100% { transform: translateX(-50%) translateY(0); }
+}
+
+/* FORM TEXT FIX */
+.signup-form,
+.signup-form h1,
+.signup-form p,
+.signup-form label {
+    color: #ffffff !important;
+}
+
+/* Inputs */
+.signup-form input {
+    color: #ffffff !important;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.signup-form input::placeholder {
+    color: #dddddd !important;
+}
+
+/* Auth Buttons */
+.signup-form button {
+    background: #ffbb00 !important;
+    color: #000 !important;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(255,187,0,0.8);
+}
+
+/* Google Button */
+.btn-google {
+    background: #ffffff !important;
+    color: #000 !important;
+    border: none !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+
+.btn-google:hover {
+    background: #f2f2f2 !important;
+    box-shadow: 0 0 12px rgba(255,255,255,0.5);
+}
+/* Hide VIDEO + VIDEO WRAPPER (signup-container) on tablet & laptop */
+/* Hide VIDEO + VIDEO WRAPPER (signup-container) on tablet & laptop */
+@media (min-width: 768px) {
+
+    /* Hide the video */
+    .bg-video,
+    .signup-container video {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Hide the entire overlay container around video */
+    .signup-container {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+}
+/* Hide video + video wrapper on Tablet + Laptop/Desktop */
+@media (min-width: 576px) {
+
+    /* Hide the video */
+    .bg-video,
+    .signup-container video {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Hide the wrapper overlay container */
+    .signup-container {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0 !important;
+        width: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+    }
+}
+
 </style>
 {% endblock %}
 
 {% block content %}
+<div class="portal-bg"></div>
+
 <div class="signup-container">
-    <!-- Left Side - Diwali Animation -->
-    <div class="diwali-animation" id="diwaliAnimation">
-        <div class="rangoli"></div>
-        <div class="diya-container">
-            <div class="diya"></div>
-            <div class="flame"></div>
+    <video class="bg-video" autoplay muted loop playsinline>
+        <source src="{% static 'videos/login-bg.mp4' %}" type="video/mp4">
+    </video>
+
         </div>
         <div class="brand-overlay">
             <a class="navbar-brand" href="/">
@@ -637,45 +802,13 @@
             <p>Sign in to continue your celebration</p>
         </div>
 
-        <form class="login" id="login_form" method="post" action="{% url 'account_login' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="id_login" class="form-label">Email Address</label>
-                <input type="email" name="login" placeholder="Enter your email" class="form-control" id="id_login" required>
-            </div>
-
-            <div class="form-group">
-                <label for="id_password" class="form-label">Password</label>
-                <input type="password" name="password" placeholder="Enter your password" class="form-control" id="id_password" required>
-            </div>
-
-            <div class="form-group">
-                <div class="form-check">
-                    <input type="checkbox" name="remember" class="form-check-input" id="id_remember">
-                    <label class="form-check-label" for="id_remember">Remember me</label>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-signup w-100" id="loginButton">Sign In</button>
-
-            <div class="divider">
-                <span>or</span>
-            </div>
-
             <a href="{% provider_login_url 'google' %}" class="btn btn-google w-100">
                 <img src="{% static 'images/Google.png' %}" style="width:20px;"> Sign in with Google
             </a>
 
             <div class="auth-links">
-                <a href="{% url 'account_reset_password' %}" class="auth-link">Forgot Password?</a>
-                <br>
                 <a href="{% url 'account_signup' %}" class="auth-link">Don't have an account? Sign Up</a>
             </div>
-
-            {% if redirect_field_value %}
-            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-            {% endif %}
-        </form>
     </div>
 </div>
 {% endblock %}
