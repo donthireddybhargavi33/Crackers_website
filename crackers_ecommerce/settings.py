@@ -24,6 +24,7 @@ CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if os.ge
 # APPLICATIONS
 # ---------------------------------------------------------------------
 INSTALLED_APPS = [
+    "unfold", 
     # Django Core
     "django.contrib.admin",
     "django.contrib.auth",
@@ -42,8 +43,8 @@ INSTALLED_APPS = [
     # Local apps
     "inventory.apps.InventoryConfig",
     "accounts.apps.AccountsConfig",
+             
 ]
-
 
 # ---------------------------------------------------------------------
 # DJANGO-ALLAUTH CONFIGURATION
@@ -111,6 +112,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.request",
+                "django.template.context_processors.debug",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
@@ -187,10 +189,37 @@ EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "True") == "True"
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "")
-DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@kannancrackers.com")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "akashgunasekar585@gmail.com")
 
 
 # ---------------------------------------------------------------------
 # MISC
 # ---------------------------------------------------------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+UNFOLD = {
+    "SITE_TITLE": "The Mannan Crackers",
+    "SITE_HEADER": "The Mannan Crackers Admin",
+    "SITE_LOGO": "/static/images/kannan_logo.png",
+    "LOGIN": {
+        "SHOW_REMEMBER": True,
+    },
+    "COLORS": {
+        "primary": {
+            500: "#FF8C00",
+        },
+        "neutral": {
+            100: "#111827",
+            200: "#1F2937",
+            300: "#4B5563",
+            400: "#6B7280",
+            500: "#9CA3AF",
+            600: "#D1D5DB",  # lighter border shade
+            700: "#E5E7EB",
+            800: "#F3F4F6",
+            900: "#F9FAFB",
+        },
+    },
+}
+

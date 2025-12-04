@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -8,7 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
     {% load static %}
-
     <style>
         :root {
             --primary-color: #0d6efd;
@@ -26,7 +26,10 @@
             --diwali-pink: #ff69b4;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
             background: #ffffff;
@@ -37,7 +40,7 @@
         .top-contact-strip {
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
             padding: 18px 0 10px;
-            border-bottom: 1px solid rgba(0,0,0,0.04);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
         .top-contact-row {
@@ -50,10 +53,10 @@
         .top-contact-card {
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
             border-radius: 12px;
-            border: 1px solid rgba(255,140,0,0.4);
+            border: 1px solid rgba(255, 140, 0, 0.4);
             padding: 10px 22px;
             min-width: 200px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
             text-align: center;
         }
 
@@ -78,6 +81,7 @@
                 justify-content: space-between;
                 gap: 20px;
             }
+
             .top-contact-card {
                 flex: 1;
             }
@@ -90,6 +94,7 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
+
             .top-contact-card {
                 width: 100%;
             }
@@ -100,9 +105,11 @@
             .top-contact-row {
                 gap: 10px;
             }
+
             .top-contact-card {
                 padding: 8px 10px;
             }
+
             .top-contact-title,
             .top-contact-phone {
                 font-size: 0.85rem;
@@ -115,7 +122,7 @@
             position: sticky;
             top: 0;
             z-index: 999;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
         }
 
         .navbar {
@@ -155,13 +162,13 @@
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
         }
 
-.navbar {
-    padding: 10px 0;
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
-    border-bottom: 3px solid var(--diwali-gold);
-    text-align: center;
-    /* flex-wrap: nowrap;  <-- remove or comment this */
-}
+        .navbar {
+            padding: 10px 0;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
+            border-bottom: 3px solid var(--diwali-gold);
+            text-align: center;
+            /* flex-wrap: nowrap;  <-- remove or comment this */
+        }
 
 
         .navbar-nav .nav-item {
@@ -176,17 +183,19 @@
 
         /* Mobile navbar refinements */
         @media (max-width: 576px) {
-            .navbar-brand { 
+            .navbar-brand {
                 font-size: 1.1rem;
                 gap: 8px;
                 margin-left: -6px;
             }
+
             .navbar-logo {
                 height: 40px;
                 width: 40px;
                 padding: 3px;
                 border-radius: 50%;
             }
+
             .navbar-nav .nav-link {
                 padding: 10px 0;
                 width: 100%;
@@ -237,7 +246,7 @@
             background: #ffffff;
             padding: 28px;
             border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             border: 2px solid rgba(255, 215, 0, 0.15);
             transition: 0.35s;
         }
@@ -261,9 +270,9 @@
             width: 56px;
             height: 56px;
             border-radius: 12px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 26px;
             flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(255, 140, 0, 0.25);
@@ -385,7 +394,7 @@
             background: linear-gradient(90deg, var(--diwali-gold), #ffb347, var(--diwali-gold));
             padding: 22px 0;
             color: #001326;
-            box-shadow: 0 3px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
         }
 
         .footer-top-row {
@@ -399,7 +408,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             padding: 12px 20px;
             border-radius: 14px;
             backdrop-filter: blur(5px);
@@ -417,9 +426,9 @@
             width: 42px;
             height: 42px;
             border-radius: 50%;
-            display:flex;
-            align-items:center;
-            justify-content:center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 20px;
         }
 
@@ -473,13 +482,18 @@
             padding: 0;
             margin: 0;
         }
-        .footer-menu li { margin: 10px 0; }
+
+        .footer-menu li {
+            margin: 10px 0;
+        }
+
         .footer-menu li a {
             color: #dce7f5;
             font-size: 16px;
             text-decoration: none;
             transition: 0.3s;
         }
+
         .footer-menu li a:hover {
             color: #ffd700;
             padding-left: 5px;
@@ -487,7 +501,7 @@
 
         .footer-map iframe {
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .footer-bottom {
@@ -496,7 +510,7 @@
             padding: 15px 0;
             font-size: 14px;
             color: #9fb2c7;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Footer responsive */
@@ -508,7 +522,7 @@
         }
 
         @media (min-width: 576px) and (max-width: 992px) {
-            .footer-main-area .row > div {
+            .footer-main-area .row>div {
                 text-align: center;
                 margin-bottom: 20px;
             }
@@ -517,12 +531,15 @@
         /* ========================== ROCKET BACK TO TOP ========================== */
         .rocket-btn {
             position: fixed;
-            bottom: 105px;
+            bottom: 145px;
             right: 25px;
             width: 55px;
             height: 55px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #b4b4b4, #ffd700);
+            background: url("{% static 'images/Cart.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             color: #fff;
             font-size: 26px;
             border: none;
@@ -549,27 +566,38 @@
         }
 
         @keyframes rocketLaunch {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 576px) {
             .rocket-btn {
                 width: 48px;
                 height: 48px;
-                bottom: 85px;
-                right: 16px;
+                bottom: 140px;
+                right: 36px;
             }
-            .rocket-btn svg { width: 25px; }
+
+            .rocket-btn svg {
+                width: 25px;
+            }
         }
 
         @media (min-width: 576px) and (max-width: 992px) {
             .rocket-btn {
                 width: 52px;
                 height: 52px;
-                bottom: 95px;
-                right: 22px;
+                bottom: 140px;
+                right: 36px;
             }
         }
 
@@ -600,9 +628,17 @@
         }
 
         @keyframes whatsappGlow {
-            0% { box-shadow: 0 0 10px #25d366; }
-            50% { box-shadow: 0 0 25px #25d366; }
-            100% { box-shadow: 0 0 10px #25d366; }
+            0% {
+                box-shadow: 0 0 10px #25d366;
+            }
+
+            50% {
+                box-shadow: 0 0 25px #25d366;
+            }
+
+            100% {
+                box-shadow: 0 0 10px #25d366;
+            }
         }
 
         @media (max-width: 576px) {
@@ -631,440 +667,413 @@
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 576px) {
             .order-now-btn img {
                 width: 70px;
             }
+
             .order-now-btn {
                 bottom: 8px;
                 right: 12px;
             }
         }
-    /* =========================
+
+        /* =========================
    FOOTER TOP STRIP BASE
    ========================= */
-.footer-top-strip {
-    background: linear-gradient(90deg, var(--diwali-gold), #ffb347, var(--diwali-gold));
-    padding: 20px 0;
-    color: #001326;
-    box-shadow: 0 3px 20px rgba(0,0,0,0.2);
-}
+        .footer-top-strip {
+            background: linear-gradient(90deg, var(--diwali-gold), #ffb347, var(--diwali-gold));
+            padding: 20px 0;
+            color: #001326;
+            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.2);
+        }
 
-.footer-top-row {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-}
+        .footer-top-row {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
 
-.footer-top-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(0,19,38,0.15);
-    padding: 12px 18px;
-    border-radius: 14px;
-    backdrop-filter: blur(5px);
-    transition: 0.3s;
-    min-width: 220px;
-}
+        .footer-top-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(0, 19, 38, 0.15);
+            padding: 12px 18px;
+            border-radius: 14px;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            min-width: 220px;
+        }
 
-.footer-top-box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
-}
+        .footer-top-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.6);
+        }
 
-.footer-top-ico {
-    background: #001326;
-    color: var(--diwali-gold);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size: 20px;
-}
+        .footer-top-ico {
+            background: #001326;
+            color: var(--diwali-gold);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
 
-.footer-top-box h6 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #001326;
-}
+        .footer-top-box h6 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #001326;
+        }
 
-.footer-top-box p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: #001326;
-}
+        .footer-top-box p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #001326;
+        }
 
-/* =========================
+        /* =========================
    DESKTOP (≥ 992px)
    3 in a row, centered
    ========================= */
-@media (min-width: 992px) {
-    .footer-top-row {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-    }
+        @media (min-width: 992px) {
+            .footer-top-row {
+                display: flex;
+                justify-content: center;
+                gap: 30px;
+            }
 
-    .footer-top-box {
-        flex: 0 0 auto;
-    }
-}
+            .footer-top-box {
+                flex: 0 0 auto;
+            }
+        }
 
-/* =========================
+        /* =========================
    TABLET (576px – 991px)
    2 + 1 layout using grid
    ========================= */
-@media (min-width: 576px) and (max-width: 991px) {
-    .footer-top-row {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px 20px;
-    }
+        @media (min-width: 576px) and (max-width: 991px) {
+            .footer-top-row {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 18px 20px;
+            }
 
-    .footer-top-box {
-        width: 100%;
-        justify-content: flex-start;
-    }
-}
+            .footer-top-box {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
 
-/* =========================
+        /* =========================
    MOBILE (≤ 575px)
    Single column
    ========================= */
-@media (max-width: 575px) {
-    .footer-top-row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
+        @media (max-width: 575px) {
+            .footer-top-row {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
 
-    .footer-top-box {
-        width: 100%;
-        padding: 10px 14px;
-    }
+            .footer-top-box {
+                width: 100%;
+                padding: 10px 14px;
+            }
 
-    .footer-top-ico {
-        width: 36px;
-        height: 36px;
-        font-size: 18px;
-    }
+            .footer-top-ico {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+            }
 
-    .footer-top-box h6 {
-        font-size: 0.9rem;
-    }
+            .footer-top-box h6 {
+                font-size: 0.9rem;
+            }
 
-    .footer-top-box p {
-        font-size: 0.85rem;
-    }
-}
- .header-main {
-    transition: transform 0.35s ease-in-out;
-}
-/* Dropdown Common Styles */
-.dropdown-menu {
-    border-radius: 10px !important;
-    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
-    border: none;
-    padding: 8px 0;
-    box-shadow: 0px 8px 25px rgba(0,0,0,0.12);
-    animation: dropdownFade 0.25s ease-in-out;
-    min-width: 180px;
-}
+            .footer-top-box p {
+                font-size: 0.85rem;
+            }
+        }
 
-/* Dropdown Item */
-.dropdown-item {
-    padding: 10px 18px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #cccccc; /* Gray 700 */
-    transition: 0.25s;
-    border-radius: 6px;
-    text-align: center;
-}
+        .header-main {
+            transition: transform 0.35s ease-in-out;
+        }
 
-/* Hover */
-.dropdown-item:hover {
-    background:rgba(255, 255, 255, 0.1); /* Gray-100 */
-    color: #ffffff;      /* Gray-900 */
-    transform: translateX(3px);
-}
+        /* Dropdown Common Styles */
+        .dropdown-menu {
+            border-radius: 10px !important;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460) !important;
+            border: none;
+            padding: 8px 0;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.12);
+            animation: dropdownFade 0.25s ease-in-out;
+            min-width: 180px;
+        }
 
-/* Logout item = red */
-.dropdown-item.text-danger {
-    color: #dc2626 !important; /* red-600 */
-    font-weight: 600;
-}
+        /* Dropdown Item */
+        .dropdown-item {
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #cccccc;
+            /* Gray 700 */
+            transition: 0.25s;
+            border-radius: 6px;
+            text-align: center;
+        }
 
-.dropdown-item.text-danger:hover {
-    background:rgba(255, 255, 255, 0.1) !important; /* red-100 */
-    color: #b91c1c !important;      /* red-700 */
-}
+        /* Hover */
+        .dropdown-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            /* Gray-100 */
+            color: #ffffff;
+            /* Gray-900 */
+            transform: translateX(3px);
+        }
 
-/* Dropdown animation */
-@keyframes dropdownFade {
-    0% {
-        opacity: 0;
-        transform: translateY(-6px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* ================= MOBILE SWIPE CAROUSEL FOR BANK DETAILS ================= */
-@media (max-width: 576px) {
+        /* Logout item = red */
+        .dropdown-item.text-danger {
+            color: #dc2626 !important;
+            /* red-600 */
+            font-weight: 600;
+        }
 
-    /* Hide grid version on mobile */
-    .bank-details-grid {
-        display: none !important;
-    }
+        .dropdown-item.text-danger:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            /* red-100 */
+            color: #b91c1c !important;
+            /* red-700 */
+        }
 
-    /* Show mobile carousel */
-    .bank-details-carousel {
-        display: block !important;
-        padding: 0 10px;
-    }
+        /* Dropdown animation */
+        @keyframes dropdownFade {
+            0% {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
 
-    .carousel-item {
-        padding: 10px 5px;
-    }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    .carousel-indicators [data-bs-target] {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: var(--diwali-gold);
-    }
-}
+        /* ================= MOBILE SWIPE CAROUSEL FOR BANK DETAILS ================= */
+        @media (max-width: 576px) {
 
-/* Desktop/Tablet show normal grid */
-@media (min-width: 577px) {
-    .bank-details-carousel {
-        display: none !important;
-    }
-}
+            /* Hide grid version on mobile */
+            .bank-details-grid {
+                display: none !important;
+            }
 
+            /* Show mobile carousel */
+            .bank-details-carousel {
+                display: block !important;
+                padding: 0 10px;
+            }
+
+            .carousel-item {
+                padding: 10px 5px;
+            }
+
+            .carousel-indicators [data-bs-target] {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: var(--diwali-gold);
+            }
+        }
+
+        /* Desktop/Tablet show normal grid */
+        @media (min-width: 577px) {
+            .bank-details-carousel {
+                display: none !important;
+            }
+        }
     </style>
 
     {# extra per-page CSS will be injected here #}
     {% block extra_css %}{% endblock %}
 </head>
+
 <body>
 
-{% if user.is_authenticated %}
-<header class="header-main">
+    {% if user.is_authenticated %}
+    <header class="header-main">
 
-    <!-- TOP CONTACT STRIP -->
-    <div class="top-contact-strip">
+        <!-- TOP CONTACT STRIP -->
+        <div class="top-contact-strip">
+            <div class="container">
+                <div class="top-contact-row">
+                    <div class="top-contact-card">
+                        <div class="top-contact-title">Customer Support</div>
+                        <div class="top-contact-phone">+91 90000 11111</div>
+                    </div>
+                    <div class="top-contact-card">
+                        <div class="top-contact-title">Order Confirm</div>
+                        <div class="top-contact-phone">+91 90000 22222</div>
+                    </div>
+                    <div class="top-contact-card">
+                        <div class="top-contact-title">Payment Confirm</div>
+                        <div class="top-contact-phone">+91 90000 33333</div>
+                    </div>
+                    <div class="top-contact-card">
+                        <div class="top-contact-title">Dispatch Details</div>
+                        <div class="top-contact-phone">+91 90000 44444</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+
+                <a class="navbar-brand" href="{% url 'inventory:home' %}">
+                    <img src="{% static 'images/kannan_logo.png' %}" alt="The Mannan Crackers Logo"
+                        class="navbar-logo">The Mannan Crackers
+                </a>
+
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navMenu">
+
+                    <ul class="navbar-nav me-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:home' %}">
+                                <i class="bi bi-house-fill"></i> Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:about' %}">
+                                <i class="bi bi-info-circle-fill"></i> About Us
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:customer_orders' %}">
+                                <i class="bi bi-bag"></i> My Orders
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:safety' %}">
+                                <i class="bi bi-shield-check"></i> Safety Tips
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:contact' %}">
+                                <i class="bi bi-telephone-fill"></i> Contact Us
+                            </a>
+                        </li>
+
+                        {% if user.is_authenticated and user.role == 'admin' %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="bi bi-shield-lock-fill"></i> Admin
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'inventory:admin_dashboard' %}">Dashboard</a>
+                                </li>
+                                <li><a class="dropdown-item"
+                                        href="{% url 'admin:accounts_customuser_changelist' %}">Users</a></li>
+                                <li><a class="dropdown-item" href="{% url 'inventory:staff_inventory' %}">Products</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% elif user.is_authenticated and user.role == 'staff' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'inventory:staff_inventory' %}">
+                                <i class="bi bi-box"></i> Inventory
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+
+                    <!-- USER DROPDOWN -->
+                    <ul class="navbar-nav">
+                        {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="bi bi-person-circle"></i> {{ user.email }}
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">My Profile</a></li>
+                                <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li><a class="btn btn-outline-light" href="{% url 'account_login' %}">Login</a></li>
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+
+    </header>
+    {% endif %}
+
+    {# ===================== PAGE CONTENT ===================== #}
+    {% block content %}{% endblock %}
+
+    <!-- Rocket Back to Top -->
+    <button id="backToTop" class="rocket-btn">
+        <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="32,4 22,20 42,20" fill="#ff4d4d" />
+            <rect x="27" y="20" width="10" height="24" rx="2" fill="#ffd700" />
+            <rect x="27" y="24" width="10" height="3" fill="#ff6b35" />
+            <rect x="27" y="30" width="10" height="3" fill="#ff6b35" />
+            <rect x="27" y="36" width="10" height="3" fill="#ff6b35" />
+            <rect x="31" y="44" width="2" height="16" fill="#b5651d" />
+            <polygon points="32,60 26,52 32,54 38,52" fill="#ff8c00" />
+            <polygon points="32,60 28,54 32,56 36,54" fill="#ffd700" />
+        </svg>
+    </button>
+
+    {% if request.resolver_match.url_name != 'home' and user.is_authenticated %}
+    <div class="cracker-bg"></div>
+    <a href="{% url 'inventory:home' %}" class="order-now-btn">
+        <img src="{% static 'images/quick_order.png' %}" alt="Quick order">
+    </a>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <!-- Bank Details Section -->
+    <section class="bank-details-section">
         <div class="container">
-            <div class="top-contact-row">
-                <div class="top-contact-card">
-                    <div class="top-contact-title">Customer Support</div>
-                    <div class="top-contact-phone">+91 90000 11111</div>
-                </div>
-                <div class="top-contact-card">
-                    <div class="top-contact-title">Order Confirm</div>
-                    <div class="top-contact-phone">+91 90000 22222</div>
-                </div>
-                <div class="top-contact-card">
-                    <div class="top-contact-title">Payment Confirm</div>
-                    <div class="top-contact-phone">+91 90000 33333</div>
-                </div>
-                <div class="top-contact-card">
-                    <div class="top-contact-title">Dispatch Details</div>
-                    <div class="top-contact-phone">+91 90000 44444</div>
-                </div>
-            </div>
-        </div>
-    </div>
+            <h2 class="section-title">Bank Details</h2>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container">
+            <!-- ================= DESKTOP/TABLET GRID ================= -->
+            <div class="bank-details-row bank-details-grid">
 
-            <a class="navbar-brand" href="{% url 'inventory:home' %}">
-                <img src="{% static 'images/kannan_logo.png' %}" alt="The Mannan Crackers Logo" class="navbar-logo">The Mannan Crackers
-            </a>
-
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navMenu">
-
-                <ul class="navbar-nav me-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory:home' %}">
-                            <i class="bi bi-house-fill"></i> Home
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory:about' %}">
-                            <i class="bi bi-info-circle-fill"></i> About Us
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory:customer_orders' %}">
-                            <i class="bi bi-bag"></i> My Orders
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory:safety' %}">
-                            <i class="bi bi-shield-check"></i> Safety Tips
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory:contact' %}">
-                            <i class="bi bi-telephone-fill"></i> Contact Us
-                        </a>
-                    </li>
-
-                    {% if user.is_authenticated and user.role == 'admin' %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="bi bi-shield-lock-fill"></i> Admin
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{% url 'inventory:admin_dashboard' %}">Dashboard</a></li>
-                            <li><a class="dropdown-item" href="{% url 'admin:accounts_customuser_changelist' %}">Users</a></li>
-                            <li><a class="dropdown-item" href="{% url 'inventory:staff_inventory' %}">Products</a></li>
-                        </ul>
-                    </li>
-                    {% elif user.is_authenticated and user.role == 'staff' %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'inventory:staff_inventory' %}">
-                            <i class="bi bi-box"></i> Inventory
-                        </a>
-                    </li>
-                    {% endif %}
-
-                </ul>
-
-                <!-- USER DROPDOWN -->
-                <ul class="navbar-nav">
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle"></i> {{ user.email }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="{% url 'accounts:profile' %}">My Profile</a></li>
-                            <li><a class="dropdown-item text-danger" href="{% url 'account_logout' %}">Logout</a></li>
-                        </ul>
-                    </li>
-                    {% else %}
-                    <li><a class="btn btn-outline-light" href="{% url 'account_login' %}">Login</a></li>
-                    {% endif %}
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-
-</header>
-{% endif %}
-
-{# ===================== PAGE CONTENT ===================== #}
-{% block content %}{% endblock %}
-
-<!-- Rocket Back to Top -->
-<button id="backToTop" class="rocket-btn">
-    <svg width="34" height="34" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="32,4 22,20 42,20" fill="#ff4d4d" />
-        <rect x="27" y="20" width="10" height="24" rx="2" fill="#ffd700"/>
-        <rect x="27" y="24" width="10" height="3" fill="#ff6b35"/>
-        <rect x="27" y="30" width="10" height="3" fill="#ff6b35"/>
-        <rect x="27" y="36" width="10" height="3" fill="#ff6b35"/>
-        <rect x="31" y="44" width="2" height="16" fill="#b5651d"/>
-        <polygon points="32,60 26,52 32,54 38,52" fill="#ff8c00"/>
-        <polygon points="32,60 28,54 32,56 36,54" fill="#ffd700"/>
-    </svg>
-</button>
-
-{% if request.resolver_match.url_name != 'home' and user.is_authenticated %}
-<div class="cracker-bg"></div>
-
-<a href="{% url 'inventory:home' %}" class="order-now-btn">
-    <img src="{% static 'images/quick_order.png' %}" alt="Quick order">
-</a>
-{% endif %}
-
-{% if user.is_authenticated %}
-<!-- Bank Details Section -->
-<section class="bank-details-section">
-   <div class="container">
-    <h2 class="section-title">Bank Details</h2>
-
-    <!-- ================= DESKTOP/TABLET GRID ================= -->
-    <div class="bank-details-row bank-details-grid">
-
-        <!-- Box 1 -->
-        <div class="bank-details-box">
-            <div class="bank-details-ico"><i class="bi bi-telephone-fill"></i></div>
-            <div>
-                <h6>PhonePe</h6>
-                <p>+91 9865677961</p>
-                <h6>Gpay</h6>
-                <p>+91 9865677961</p>
-            </div>
-        </div>
-
-        <!-- Box 2 -->
-        <div class="bank-details-box">
-            <div class="bank-details-ico"><i class="bi bi-building"></i></div>
-            <div>
-                <h6>N.Ganesh Kumar</h6>
-                <p>City Union Bank</p>
-                <p class="secondary">CIUB0000227</p>
-                <p class="tertiary">VEERAPANDI, TIRUPUR</p>
-            </div>
-        </div>
-
-        <!-- Box 3 -->
-        <div class="bank-details-box">
-            <div class="bank-details-ico"><i class="bi bi-bank2"></i></div>
-            <div>
-                <h6>N.Ganesh Kumar</h6>
-                <p>Bank of Baroda</p>
-                <p class="secondary">BARB0COTTON</p>
-                <p class="tertiary">MAIN BRANCH: TIRUPUR</p>
-            </div>
-        </div>
-
-        <!-- Box 4 -->
-        <div class="bank-details-box">
-            <div class="bank-details-ico"><i class="bi bi-credit-card-2-front"></i></div>
-            <div>
-                <h6>N.Ganesh Kumar</h6>
-                <p>HDFC Bank</p>
-                <p class="secondary">HDFC0003724</p>
-                <p class="tertiary">DHARAPURAM BRANCH</p>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- ================= MOBILE SWIPE CAROUSEL ================= -->
-    <div id="bankCarousel" class="carousel slide bank-details-carousel" data-bs-ride="carousel">
-        
-        <div class="carousel-inner">
-
-            <div class="carousel-item active">
+                <!-- Box 1 -->
                 <div class="bank-details-box">
                     <div class="bank-details-ico"><i class="bi bi-telephone-fill"></i></div>
                     <div>
@@ -1074,9 +1083,8 @@
                         <p>+91 9865677961</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="carousel-item">
+                <!-- Box 2 -->
                 <div class="bank-details-box">
                     <div class="bank-details-ico"><i class="bi bi-building"></i></div>
                     <div>
@@ -1086,9 +1094,8 @@
                         <p class="tertiary">VEERAPANDI, TIRUPUR</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="carousel-item">
+                <!-- Box 3 -->
                 <div class="bank-details-box">
                     <div class="bank-details-ico"><i class="bi bi-bank2"></i></div>
                     <div>
@@ -1098,9 +1105,8 @@
                         <p class="tertiary">MAIN BRANCH: TIRUPUR</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="carousel-item">
+                <!-- Box 4 -->
                 <div class="bank-details-box">
                     <div class="bank-details-ico"><i class="bi bi-credit-card-2-front"></i></div>
                     <div>
@@ -1110,162 +1116,220 @@
                         <p class="tertiary">DHARAPURAM BRANCH</p>
                     </div>
                 </div>
+
+            </div>
+
+            <!-- ================= MOBILE SWIPE CAROUSEL ================= -->
+            <div id="bankCarousel" class="carousel slide bank-details-carousel" data-bs-ride="carousel">
+
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="bank-details-box">
+                            <div class="bank-details-ico"><i class="bi bi-telephone-fill"></i></div>
+                            <div>
+                                <h6>PhonePe</h6>
+                                <p>+91 9865677961</p>
+                                <h6>Gpay</h6>
+                                <p>+91 9865677961</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="bank-details-box">
+                            <div class="bank-details-ico"><i class="bi bi-building"></i></div>
+                            <div>
+                                <h6>N.Ganesh Kumar</h6>
+                                <p>City Union Bank</p>
+                                <p class="secondary">CIUB0000227</p>
+                                <p class="tertiary">VEERAPANDI, TIRUPUR</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="bank-details-box">
+                            <div class="bank-details-ico"><i class="bi bi-bank2"></i></div>
+                            <div>
+                                <h6>N.Ganesh Kumar</h6>
+                                <p>Bank of Baroda</p>
+                                <p class="secondary">BARB0COTTON</p>
+                                <p class="tertiary">MAIN BRANCH: TIRUPUR</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="bank-details-box">
+                            <div class="bank-details-ico"><i class="bi bi-credit-card-2-front"></i></div>
+                            <div>
+                                <h6>N.Ganesh Kumar</h6>
+                                <p>HDFC Bank</p>
+                                <p class="secondary">HDFC0003724</p>
+                                <p class="tertiary">DHARAPURAM BRANCH</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Dots -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="2"></button>
+                    <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="3"></button>
+                </div>
+
             </div>
 
         </div>
 
-        <!-- Dots -->
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="0" class="active"></button>
-            <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="2"></button>
-            <button type="button" data-bs-target="#bankCarousel" data-bs-slide-to="3"></button>
-        </div>
+    </section>
 
-    </div>
+    <footer class="premium-footer">
 
-</div>
+        <div class="footer-top-strip">
+            <div class="container">
+                <div class="footer-top-row">
 
-</section>
-
-<footer class="premium-footer">
-
-    <div class="footer-top-strip">
-        <div class="container">
-            <div class="footer-top-row">
-
-                <div class="footer-top-box">
-                    <div class="footer-top-ico"><i class="bi bi-telephone-fill"></i></div>
-                    <div>
-                        <h6>Customer Support</h6>
-                        <p>+91 90000 11111</p>
+                    <div class="footer-top-box">
+                        <div class="footer-top-ico"><i class="bi bi-telephone-fill"></i></div>
+                        <div>
+                            <h6>Customer Support</h6>
+                            <p>+91 90000 11111</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="footer-top-box">
-                    <div class="footer-top-ico"><i class="bi bi-geo-alt-fill"></i></div>
-                    <div>
-                        <h6>Store Location</h6>
-                        <p>The Mannan Crackers, India</p>
+                    <div class="footer-top-box">
+                        <div class="footer-top-ico"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div>
+                            <h6>Store Location</h6>
+                            <p>The Mannan Crackers, India</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="footer-top-box">
-                    <div class="footer-top-ico"><i class="bi bi-instagram"></i></div>
-                    <div>
-                        <h6>Follow Us</h6>
-                        <p>@Mannancrackers</p>
+                    <div class="footer-top-box">
+                        <div class="footer-top-ico"><i class="bi bi-instagram"></i></div>
+                        <div>
+                            <h6>Follow Us</h6>
+                            <p>@Mannancrackers</p>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer-main-area">
-        <div class="container">
-            <div class="row g-4">
+        <div class="footer-main-area">
+            <div class="container">
+                <div class="row g-4">
 
-                <div class="col-md-4">
-                    <div class="footer-brand-section">
-                        <img src="{% static 'images/kannan_logo.png' %}" alt="The Mannan Crackers Logo" class="footer-brand-logo">
-                        <div class="footer-brand-name">The Mannan Crackers</div>
+                    <div class="col-md-4">
+                        <div class="footer-brand-section">
+                            <img src="{% static 'images/kannan_logo.png' %}" alt="The Mannan Crackers Logo"
+                                class="footer-brand-logo">
+                            <div class="footer-brand-name">The Mannan Crackers</div>
+                        </div>
+                        <p class="footer-desc">
+                            Premium crackers at best prices.
+                            Safe handling, trusted quality & fast delivery.
+                        </p>
                     </div>
-                    <p class="footer-desc">
-                        Premium crackers at best prices.
-                        Safe handling, trusted quality & fast delivery.
-                    </p>
-                </div>
 
-                <div class="col-md-4">
-                    <h5>Quick Links</h5>
-                    <ul class="footer-menu">
-                        {% if user.is_authenticated %}
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <ul class="footer-menu">
+                            {% if user.is_authenticated %}
                             <li><a href="{% url 'inventory:home' %}"><i class="bi bi-house-fill"></i> Home</a></li>
-                            <li><a href="{% url 'inventory:about' %}"><i class="bi bi-info-circle-fill"></i> About Us</a></li>
-                            <li><a href="{% url 'inventory:customer_orders' %}"><i class="bi bi-bag-check-fill"></i> My Orders</a></li>
-                            <li><a href="{% url 'inventory:safety' %}"><i class="bi bi-shield-check"></i> Safety Tips</a></li>
-                            <li><a href="{% url 'inventory:contact' %}"><i class="bi bi-telephone-fill"></i> Contact Us</a></li>
+                            <li><a href="{% url 'inventory:about' %}"><i class="bi bi-info-circle-fill"></i> About
+                                    Us</a></li>
+                            <li><a href="{% url 'inventory:customer_orders' %}"><i class="bi bi-bag-check-fill"></i> My
+                                    Orders</a></li>
+                            <li><a href="{% url 'inventory:safety' %}"><i class="bi bi-shield-check"></i> Safety
+                                    Tips</a></li>
+                            <li><a href="{% url 'inventory:contact' %}"><i class="bi bi-telephone-fill"></i> Contact
+                                    Us</a></li>
                             {% if user.is_staff %}
-                            <li><a href="{% url 'inventory:admin_dashboard' %}"><i class="bi bi-speedometer"></i> Admin Dashboard</a></li>
+                            <li><a href="{% url 'inventory:admin_dashboard' %}"><i class="bi bi-speedometer"></i> Admin
+                                    Dashboard</a></li>
                             {% endif %}
-                        {% endif %}
-                    </ul>
-                </div>
-
-                <div class="col-md-4">
-                    <h5>Reach Us</h5>
-                    <div class="footer-map">
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.06859787431!2d77.82179877480544!3d9.42799908324272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b06db4e2b3a1f77%3A0x26b98d2bb6f6f489!2sMeenampatti%2C%20Tamil%20Nadu%20626189!5e0!3m2!1sen!2sin!4v1708599820000"
-                            width="100%" height="180" style="border:0; border-radius:12px;"
-                            allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                            {% endif %}
+                        </ul>
                     </div>
-                </div>
 
+                    <div class="col-md-4">
+                        <h5>Reach Us</h5>
+                        <div class="footer-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.06859787431!2d77.82179877480544!3d9.42799908324272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b06db4e2b3a1f77%3A0x26b98d2bb6f6f489!2sMeenampatti%2C%20Tamil%20Nadu%20626189!5e0!3m2!1sen!2sin!4v1708599820000"
+                                width="100%" height="180" style="border:0; border-radius:12px;" allowfullscreen=""
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer-bottom">
-        © {% now "Y" %} The Mannan Crackers • Designed by Auronix with Passion and ❤️
-    </div>
-</footer>
-{% endif %}
+        <div class="footer-bottom">
+            © {% now "Y" %} The Mannan Crackers • Designed by Auronix with Passion and ❤️
+        </div>
+    </footer>
+    {% endif %}
 
-<a href="https://wa.me/919000011111"
-   class="whatsapp-float"
-   target="_blank">
-   <i class="bi bi-whatsapp"></i>
-</a>
+    <a href="https://wa.me/919000011111" class="whatsapp-float" target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-{% block extra_js %}{% endblock %}
+    {% block extra_js %}{% endblock %}
 
-<script>
-    // Show / hide rocket
-    window.addEventListener("scroll", function () {
-        const btn = document.getElementById("backToTop");
-        if (!btn) return;
-        if (window.scrollY > 300) {
-            btn.classList.add("show");
-        } else {
-            btn.classList.remove("show");
-        }
-    });
-
-    // Scroll to top
-    const rocketBtn = document.getElementById("backToTop");
-    if (rocketBtn) {
-        rocketBtn.addEventListener("click", function () {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-            this.style.boxShadow = "0 0 40px #ff4500, 0 0 80px #ff8c00";
-            setTimeout(() => {
-                this.style.boxShadow = "0 0 15px rgba(255, 193, 7, 0.7)";
-            }, 600);
+    <script>
+        // Show / hide rocket
+        window.addEventListener("scroll", function () {
+            const btn = document.getElementById("backToTop");
+            if (!btn) return;
+            if (window.scrollY > 300) {
+                btn.classList.add("show");
+            } else {
+                btn.classList.remove("show");
+            }
         });
-    }
-</script>
-<script>
-const header = document.querySelector(".header-main");
 
-window.addEventListener("scroll", function () {
-    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        // Scroll to top
+        const rocketBtn = document.getElementById("backToTop");
+        if (rocketBtn) {
+            rocketBtn.addEventListener("click", function () {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                this.style.boxShadow = "0 0 40px #ff4500, 0 0 80px #ff8c00";
+                setTimeout(() => {
+                    this.style.boxShadow = "0 0 15px rgba(255, 193, 7, 0.7)";
+                }, 600);
+            });
+        }
+    </script>
+    <script>
+        const header = document.querySelector(".header-main");
 
-    if (currentScroll <= 10) {
-        // At the top → show navbar
-        header.style.transform = "translateY(0)";
-    } else {
-        // Scrolling anywhere (up or down) → hide navbar
-        header.style.transform = "translateY(-100%)";
-    }
-});
-</script>
+        window.addEventListener("scroll", function () {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            if (currentScroll <= 10) {
+                // At the top → show navbar
+                header.style.transform = "translateY(0)";
+            } else {
+                // Scrolling anywhere (up or down) → hide navbar
+                header.style.transform = "translateY(-100%)";
+            }
+        });
+    </script>
 
 
 
 </body>
+
 </html>
