@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -12,6 +12,48 @@ from accounts.decorators import admin_required, staff_required, approved_user_re
 from django.template.loader import render_to_string
 from . import utils
 import json
+import os
+from django.conf import settings
+import mimetypes
+
+# =====================================================
+# 📁 MEDIA FILE SERVING
+# =====================================================
+
+def serve_media(request, path):
+    """
+    Serve media files directly.
+    Handles /media/products/* and other media files even when DEBUG=False
+    """
+    try:
+        file_path = os.path.join(settings.MEDIA_ROOT, path)
+        
+        # Security: prevent directory traversal attacks
+        file_path = os.path.abspath(file_path)
+        media_root = os.path.abspath(settings.MEDIA_ROOT)
+        
+        if not file_path.startswith(media_root):
+            return JsonResponse({'error': 'Access denied'}, status=403)
+        
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            # Determine content type
+            content_type, _ = mimetypes.guess_type(file_path)
+            if content_type is None:
+                content_type = 'application/octet-stream'
+            
+            # FileResponse handles opening and closing the file automatically
+            response = FileResponse(open(file_path, 'rb'), content_type=content_type)
+            response['Content-Disposition'] = f'inline; filename="{os.path.basename(file_path)}"'
+            response['Content-Length'] = os.path.getsize(file_path)
+            return response
+        else:
+            return JsonResponse({'error': 'File not found'}, status=404)
+    except Exception as e:
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.error(f"Media serving error: {str(e)}")
+        return JsonResponse({'error': 'Error serving file'}, status=500)
+
 
 @login_required(login_url='account_login')
 def home(request):

@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get CSRF token from window variable (set in base.html)
+    
+    // Minimum order amount constant
+    const MIN_ORDER_AMOUNT = 3000;
 
     // Get checkout elements
     const checkoutForm = document.getElementById('checkoutForm');
@@ -14,6 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!window.cart || window.cart.length === 0) {
             showToast('Your cart is empty!', 'warning');
+            return;
+        }
+        
+        // Validate minimum order amount
+        const cartTotal = window.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        if (cartTotal < MIN_ORDER_AMOUNT) {
+            showToast(`Minimum order amount is ₹${MIN_ORDER_AMOUNT}. Current total: ₹${cartTotal.toFixed(2)}`, 'warning');
             return;
         }
 

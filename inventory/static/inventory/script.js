@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const checkoutButton = document.getElementById('proceedToCheckout');
     let totalCartAmount = 0;
     let cartItems = {};
+    
+    // Minimum order amount constant
+    const MIN_ORDER_AMOUNT = 3000;
 
     /* -------------------- 🧮 CORE CART UTILITIES -------------------- */
     function updateAllCartTotals(amount) {
@@ -15,6 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
             element.textContent = amount.toFixed(2);
         });
         modalSubtotal.textContent = amount.toFixed(2);
+        
+        // Update checkout button state based on minimum amount
+        updateCheckoutButtonState(amount);
+    }
+    
+    function updateCheckoutButtonState(amount) {
+        if (checkoutButton) {
+            if (amount < MIN_ORDER_AMOUNT) {
+                checkoutButton.disabled = true;
+                checkoutButton.title = `Minimum order amount is ₹${MIN_ORDER_AMOUNT}`;
+                checkoutButton.style.opacity = '0.6';
+                checkoutButton.style.cursor = 'not-allowed';
+            } else {
+                checkoutButton.disabled = false;
+                checkoutButton.title = 'Proceed to Checkout';
+                checkoutButton.style.opacity = '1';
+                checkoutButton.style.cursor = 'pointer';
+            }
+        }
     }
 
     function updateCartCount() {
@@ -132,9 +154,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     updateCartCount();
                     renderCartItems();
 
-                    // 🧨 Animated feedback (Diwali style)
-                    const message = `🎇 Added ${quantity} × ${productName} to cart`;
-                    showToast(message, 'success');
+                    // Show feedback about minimum order
+                    if (totalCartAmount < MIN_ORDER_AMOUNT) {
+                        const remaining = (MIN_ORDER_AMOUNT - totalCartAmount).toFixed(2);
+                        const message = `🎇 Added ${quantity} × ${productName} to cart. Add ₹${remaining} more to reach minimum order amount`;
+                        showToast(message, 'info');
+                    } else {
+                        const message = `🎇 Added ${quantity} × ${productName} to cart`;
+                        showToast(message, 'success');
+                    }
                 } else {
                     showToast(data.error || 'Failed to add items to cart', 'danger');
                 }
