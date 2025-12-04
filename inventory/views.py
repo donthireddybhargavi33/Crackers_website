@@ -838,14 +838,13 @@ def get_quick_order_lists(request):
 
 
 @login_required(login_url='account_login')
-def quick_order_checkout(request):
+def quick_order_checkout(request, list_id):
     """Handle quick order checkout - adds predefined list to cart and proceeds to checkout"""
     if request.method != 'POST':
         return utils.handle_api_error('validation', 'Invalid request method', 405)
     
     try:
         data = json.loads(request.body)
-        list_id = data.get('list_id')
         products_data = data.get('products', [])
         
         if not products_data:

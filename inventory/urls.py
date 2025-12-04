@@ -8,8 +8,10 @@ urlpatterns = [
     path('update-stock/', views.update_stock, name='update_stock'),
     path('checkout/', views.checkout, name='checkout'),
     path('quick-order-lists/', views.get_quick_order_lists, name='quick_order_lists'),
-    path('quick-order/<int:list_id>/checkout/', views.quick_order_checkout, name='quick_order_checkout'),
-
+    path(
+    "quick-order/<int:list_id>/checkout/",
+    views.quick_order_checkout,
+    name="quick_order_checkout"),
     # ✅ Admin dashboard and related routes
     path('admin/dashboard/', views.admin_dashboard, name='admin_dashboard'),
     path('admin/dashboard-data/', views.dashboard_data, name='dashboard_data'),

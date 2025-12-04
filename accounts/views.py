@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from allauth.socialaccount.models import SocialAccount
 from .models import CustomUser
 
+
 @login_required
 def profile_view(request):
     return render(request, 'accounts/profile.html', {'user': request.user})
