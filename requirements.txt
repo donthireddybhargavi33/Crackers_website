@@ -11,3 +11,4 @@ django-cors-headers>=4.2.0  # For handling CORS
 django-filter>=23.3  # For filtering querysets
 django-storages>=1.14  # For handling file storage
 psycopg2-binary>=2.9.9  # For PostgreSQL support (optional)
+django-unfold>=0.72.0  # For modern Django admin interface
