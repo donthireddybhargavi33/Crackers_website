@@ -15,10 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
-from inventory.views import home, handle_404, handle_500, handle_403, handle_400, handle_connection_error, handle_maintenance
+from inventory.views import home, handle_404, handle_500, handle_403, handle_400, handle_connection_error, handle_maintenance, serve_media
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,11 +34,15 @@ urlpatterns = [
     path('error/400/', handle_400, name='error_400'),
     path('error/connection/', handle_connection_error, name='error_connection'),
     path('error/maintenance/', handle_maintenance, name='error_maintenance'),
+    
+    # Media file serving (works even when DEBUG=False)
+    re_path(r'^media/(?P<path>.*)$', serve_media, name='serve_media'),
 ]
 
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media and static files regardless of DEBUG setting
+# This allows development and production-like environments to both serve files
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Custom error handlers
 handler404 = handle_404
