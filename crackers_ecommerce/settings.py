@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Local apps
     "inventory.apps.InventoryConfig",
     "accounts.apps.AccountsConfig",
+    "whatsapp_notifications.apps.WhatsappNotificationsConfig",
              
 ]
 
@@ -223,4 +224,26 @@ UNFOLD = {
         },
     },
 }
+
+
+# =====================================================
+# WHATSAPP CLOUD API CONFIGURATION
+# =====================================================
+# Meta WhatsApp Cloud API for sending order notifications
+# Credentials: https://developers.facebook.com/docs/whatsapp/cloud-api/get-started
+
+WHATSAPP_PHONE_NUMBER_ID = os.getenv("WHATSAPP_PHONE_NUMBER_ID", "")
+WHATSAPP_ACCESS_TOKEN = os.getenv("WHATSAPP_ACCESS_TOKEN", "")
+WHATSAPP_API_VERSION = os.getenv("WHATSAPP_API_VERSION", "v18.0")
+WHATSAPP_ADMIN_NUMBER = os.getenv("WHATSAPP_ADMIN_NUMBER", "")
+
+# Dry-run mode: True = log messages without API calls (development)
+#               False = send actual messages via Meta API (production)
+WHATSAPP_DRY_RUN = os.getenv("WHATSAPP_DRY_RUN", "True") == "True"
+
+# Enable/disable WhatsApp notifications globally
+WHATSAPP_NOTIFICATIONS_ENABLED = os.getenv("WHATSAPP_NOTIFICATIONS_ENABLED", "True") == "True"
+
+# Optional: Enable Celery for async notification sending
+WHATSAPP_USE_CELERY = os.getenv("WHATSAPP_USE_CELERY", "False") == "True"
 
